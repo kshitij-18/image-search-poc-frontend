@@ -4,10 +4,11 @@ import SearchBar from './components/SearchBar'
 import useDebounce from './hooks/useDebounce'
 import axios from 'axios';
 import Image from './components/Image';
+import { IImageData } from './types/IImageSearchResponse';
 
 function App() {
   const [searchVal, setSearchVal] = useState<string>('');
-  const fetchImages = useCallback(async () => axios.get('http://localhost:3000', {
+  const fetchImages = useCallback(async () => axios.get((import.meta.env.VITE_API_URL as string), {
     params: {
       search: searchVal,
     }
@@ -22,7 +23,7 @@ function App() {
       <SearchBar searchValue={searchVal} setSearchValue={setSearchVal} />
       <div className='grid grid-rows-2 grid-cols-5 gap-4'>
       {
-        result?.data?.map(d => (
+        result?.data?.map((d: IImageData) => (
           <Image imageUrl={d.imageUrl}/>
         ))
       }

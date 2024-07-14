@@ -1,4 +1,4 @@
-type IImageData = {
+export type IImageData = {
     imageUrl: string,
     score: number,
 }
